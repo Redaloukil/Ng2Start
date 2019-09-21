@@ -1,2 +1,0 @@
-#Star Wars Angular Application 
-

@@ -1,0 +1,13 @@
+<p>edit works!</p>
+<fieldset>
+    <input [(ngModel)]="title" type="text" placeholder="Enter todo text"/>
+    <input [(ngModel)]="description" type="text" plaholder="Enter todo description"/>
+
+
+    <button (click)="addTodo()">Submit</button>
+</fieldset>
+
+
+
+<h1>{{title}}</h1>
+<p>{{description}}</p>
