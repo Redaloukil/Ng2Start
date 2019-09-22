@@ -20,6 +20,13 @@ export class EditComponent implements OnInit {
     
   }
 
+  modelTitleChanged(ev){
+    console.log(ev);
+  }
+  
+  modelDescriptionChanged(ev){
+    console.log(ev);
+  }
 
   validate(){
     let errors;

@@ -1,6 +1,5 @@
-class Todo {
-    id : number ;
-    text : string;
+export class Todo {
+    title : string;
+    description : string;
     checked : boolean; 
-
 }
