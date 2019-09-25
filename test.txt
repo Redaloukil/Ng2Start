@@ -1,0 +1,11 @@
+performance :
+first i analysed all the ressources that are fetched , there are lot of unusable ressources like some icons , 
+script tags before the html body.
+ 
+The data takes some time to load on dashbord , first because it's imporing unusable data with and big set of data. i maked some reseach about the api and i think that
+the it's importing too big data sizes with unusable data.
+for example 
+
+
+
+usability : 

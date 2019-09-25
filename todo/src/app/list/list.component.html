@@ -1,7 +1,11 @@
 <p>list works!</p>
 
-<ul>
-        
-</ul>
+<div>
+        <div *ngFor="let todo of TodoList">
+            <h1>{{todo.title}}</h1>
+            <p>{{todo.description}}</p>
+            <input type="checkbox" checked="{{todo.checked}}"/>
+        </div>
+</div>
 
 

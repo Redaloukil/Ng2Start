@@ -6,8 +6,8 @@ import {
   MetaReducer
 } from '@ngrx/store';
 import { environment } from '../../environments/environment';
-import { EditActions, EditActionTypes } from '../actions/edit.actions';
-import { ListActions, ListActionTypes } from '../actions/list.actions';
+import { EditActionTypes } from '../actions/edit.actions';
+import { ListActionTypes } from '../actions/list.actions';
 import { Todo } from '../utils/Todo';
 
 export interface ListState {
@@ -39,30 +39,62 @@ const InitialListState = {
 }
 
 
-export function EditReducer(state:EditState = InitialEditState, action: EditActions): EditState {
+export function EditReducer(state:EditState = InitialEditState, action): EditState {
   switch (action.type) {
     case EditActionTypes.LoadEdits:
       return {
-        ...state
+        title : '' ,
+        description : '',
+        checked : false,
       };
-
+    case EditActionTypes.ChangeEditTitle :
+      return {
+        ...state,
+        title :  action.value ,
+      }
+    case EditActionTypes.ChangeEditDescription : 
+      return {
+        ...state,
+        description : action.value,
+      }
+    case EditActionTypes.ChangeEditChecked : 
+      return {
+        ...state,
+        checked : false, 
+      }
     default:
       return state;
   }
 }
 
-export function ListReducer(state:ListState = InitialListState, action: ListActions): ListState {
+export function ListReducer(state:ListState = InitialListState, action): ListState {
   switch (action.type) {
     case ListActionTypes.LoadLists:
       return {
-        ...state
+        ...state,
+        TodoList : action.payload,
       };
-
+    case ListActionTypes.ChangeFilterLists:
+      return {
+        filter : action.payload,
+        TodoList : [],
+      }
+    case ListActionTypes.DeleteLists :
+      return {
+        TodoList : [],
+        filter :'',
+      }
     default:
       return state;
   }
 }
 
+export const selectTodos = (state: AppState) => state.ListState.TodoList;
 
 
-export const metaReducers: MetaReducer<State>[] = !environment.production ? [] : [];
+
+
+// export const reducers: ActionReducerMap<AppState> = {
+  
+// };
+
