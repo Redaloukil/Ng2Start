@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Todo } from '../utils/Todo';
-import { dispatch } from 'rxjs/internal/observable/range';
+import { Store } from '@ngrx/store';
+import {Actions , ofType} from '@ngrx/effects'
 import '../actions/list.actions';
 import { ListActionTypes } from '../actions/list.actions';
+import { AppState } from '../reducers';
 
 @Component({
   selector: 'app-list',
@@ -10,41 +12,23 @@ import { ListActionTypes } from '../actions/list.actions';
   styleUrls: ['./list.component.css']
 })
 
-
-const mapDispatchToProps = dispatch => ({
-  onLoad : payload =>
-    dispatch({type : ListActionTypes.LoadLists ,payload }),
-  onUnload : () =>
-    dispatch({}) 
-})
 export class ListComponent implements OnInit {
 
-  constructor() { }
+  constructor(private actions$: Actions, private store: Store<AppState>) { }
 
-  public TodoList : Todo[] = [
-    {
-      title : "Hello world" ,
-      description :"first Todo" ,
-      checked : false ,
-    },
-    {
-      title : "World Hello" ,
-      description :"second   Todo" ,
-      checked : false ,
-    },
-    {
-      title : "Hello go" ,
-      description :"third Todo" ,
-      checked : false ,
-    }
-  ]; 
+  todos : Todo[] = [
+    {title : 'titleA' , description : 'Description of title A' , checked : false},
+    {title : 'titleB' , description : 'Description of title B' , checked : false},
+    {title : 'titleC' , description : 'Description of title C' , checked : false}
+  ] 
 
   ngOnInit() {
     // load the todo list 
-    
+    this.store.dispatch({type : ListActionTypes.LoadLists , payload : this.todos })
   }
 
   onChangefilter(){
+
 
   }
 

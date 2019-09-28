@@ -3,12 +3,16 @@ import {
   ActionReducerMap,
   createFeatureSelector,
   createSelector,
-  MetaReducer
+  MetaReducer,
+  ActionType
 } from '@ngrx/store';
 import { environment } from '../../environments/environment';
+import { routerReducer, RouterReducerState} from '@ngrx/router-store';
 import { EditActionTypes } from '../actions/edit.actions';
 import { ListActionTypes } from '../actions/list.actions';
 import { Todo } from '../utils/Todo';
+import { Action } from 'rxjs/internal/scheduler/Action';
+
 
 export interface ListState {
   TodoList : Todo[] | [],
@@ -22,7 +26,8 @@ export interface EditState {
 }
 
 export interface AppState {
-  Edit: EditState;
+  routerState ?:RouterReducerState,
+  EditState: EditState;
   ListState: ListState;
 }
 
@@ -39,7 +44,7 @@ const InitialListState = {
 }
 
 
-export function EditReducer(state:EditState = InitialEditState, action): EditState {
+export function EditReducer(state:EditState = InitialEditState, action : any): EditState {
   switch (action.type) {
     case EditActionTypes.LoadEdits:
       return {
@@ -50,7 +55,7 @@ export function EditReducer(state:EditState = InitialEditState, action): EditSta
     case EditActionTypes.ChangeEditTitle :
       return {
         ...state,
-        title :  action.value ,
+        title : action.value ,
       }
     case EditActionTypes.ChangeEditDescription : 
       return {
@@ -67,8 +72,8 @@ export function EditReducer(state:EditState = InitialEditState, action): EditSta
   }
 }
 
-export function ListReducer(state:ListState = InitialListState, action): ListState {
-  switch (action.type) {
+export function ListReducer(state:ListState = InitialListState, action : ListActionTypes): ListState {
+  switch (action) {
     case ListActionTypes.LoadLists:
       return {
         ...state,
@@ -94,7 +99,11 @@ export const selectTodos = (state: AppState) => state.ListState.TodoList;
 
 
 
-// export const reducers: ActionReducerMap<AppState> = {
-  
-// };
+// export const reducers : ActionReducerMap<AppState,any> = {
+//   router: routerReducer,
+//   edit : EditReducer ,
+//   list : ListReducer 
+// }
+
+
 

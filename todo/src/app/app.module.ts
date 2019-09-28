@@ -6,16 +6,26 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ListComponent } from './list/list.component';
 import { EditComponent } from './edit/edit.component';
-import { StoreModule } from '@ngrx/store';
+import { StoreModule, Store } from '@ngrx/store';
 // import { reducers, metaReducers } from './reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { ListReducer , EditReducer } from './reducers/index';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     ListComponent,
-    EditComponent
+    EditComponent,
+    StoreModule.forRoot({
+      ListReducer,
+    })
+    // Instrumentation must be imported after importing StoreModule (config is optional)
+    StoreDevtoolsModule.instrument({
+      maxAge:25 ,
+      logOnly:true
+    })
   ],
   imports: [
     BrowserModule,
