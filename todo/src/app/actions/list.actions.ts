@@ -6,29 +6,38 @@ import { extend } from 'webdriver-js-extender';
 export enum ListActionTypes {
   LoadLists = '[List] Load Lists',
   ChangeFilterLists = '[List] Filter Lists',  
-  DeleteLists = '[List] Delete Lists'
+  DeleteLists = '[List] Delete Lists',
+  AddTodoList = '[List] Add Lists',
 }
 
-export class LoadAction implements Action {
+export class ListAction implements Action {
   constructor(public type : string){};
 }
 
-export class LoadLists extends LoadAction {
+export class LoadLists extends ListAction {
   
   constructor(public payload : Todo[]){
     super(ListActionTypes.LoadLists);
+    
   }
+
+  
 }
 
-export class ChangeFilter extends LoadAction {
+export class ChangeFilter extends ListAction {
   constructor(public payload : string){
     super(ListActionTypes.ChangeFilterLists);
   }
 }
 
-export class DeleteLists extends LoadAction {
+export class DeleteLists extends ListAction {
   constructor(){
     super(ListActionTypes.DeleteLists);
   }
 }
 
+export class AddTodoList extends ListAction {
+  constructor(public payload : Todo){
+    super(ListActionTypes.AddTodoList)
+  }
+}

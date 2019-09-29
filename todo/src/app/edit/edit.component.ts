@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { dispatch } from 'rxjs/internal/observable/range';
+import { State } from '@ngrx/store';
+import { AppState } from '../reducers';
 
 @Component({
   selector: 'app-edit',
@@ -7,12 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditComponent implements OnInit {
 
-  constructor() { }
+  constructor(private state : State<AppState>) { }
 
   public title:string;
   public description:string;
 
+  
+
   ngOnInit() {
+
   }
 
   addTodo(){
@@ -21,7 +27,6 @@ export class EditComponent implements OnInit {
   }
 
   modelTitleChanged(ev){
-    console.log(ev);
   }
   
   modelDescriptionChanged(ev){

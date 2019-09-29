@@ -9,29 +9,40 @@ export enum EditActionTypes {
   ChangeEditChecked = '[Edit] Change Edit Checked',
 }
 
-export class LoadEdits implements Action {
-  readonly type = EditActionTypes.LoadEdits;
+export class EditAction implements Action {
+  constructor(public type : string){}
 }
  
-export class ChangeEditField implements Action {
-  readonly type = EditActionTypes.ChangeEditTitle;
-   public value:string;
+export class LoadEdit extends EditAction {
+  constructor(){
+    super(EditActionTypes.LoadEdits)
+  }
 }
 
-export class ChangeEditDescription implements Action {
-  readonly type = EditActionTypes.ChangeEditDescription;
-   public value:string;
+export class SubmitEdit extends EditAction {
+  constructor(public payload : Todo){
+    super(EditActionTypes.SubmitEdit)
+  }
 }
 
-export class ChangeEditChecked implements Action {
-  readonly type = EditActionTypes.ChangeEditChecked;
-   public value:string;
+export class ChangeEditTitle extends EditAction {
+  constructor(value : string , key : string){
+    super(EditActionTypes.ChangeEditTitle)
+  }
 }
 
-export class SubmitEdit implements Action {
-  readonly type = EditActionTypes.SubmitEdit;
-  public value:Todo;
+export class ChangeEditDescription extends EditAction {
+  constructor(value : string , key : string){
+    super(EditActionTypes.ChangeEditTitle)
+  }
 }
+
+export class ChangeEditChecked extends EditAction {
+  constructor(value : string , key : string){
+    super(EditActionTypes.ChangeEditTitle)
+  }
+}
+
 
 
 

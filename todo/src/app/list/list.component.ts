@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Todo } from '../utils/Todo';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import {Actions , ofType} from '@ngrx/effects'
 import '../actions/list.actions';
-import { ListActionTypes } from '../actions/list.actions';
-import { AppState } from '../reducers';
+import { ListActionTypes, ChangeFilter } from '../actions/list.actions';
+import { AppState, selectTodos } from '../reducers';
+import { getListData } from './list.selector';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-list',
@@ -14,22 +16,24 @@ import { AppState } from '../reducers';
 
 export class ListComponent implements OnInit {
 
-  constructor(private actions$: Actions, private store: Store<AppState>) { }
+  constructor(private store : Store<AppState>) { }
 
-  todos : Todo[] = [
-    {title : 'titleA' , description : 'Description of title A' , checked : false},
-    {title : 'titleB' , description : 'Description of title B' , checked : false},
-    {title : 'titleC' , description : 'Description of title C' , checked : false}
-  ] 
+  todos :Subscription;
 
   ngOnInit() {
     // load the todo list 
-    this.store.dispatch({type : ListActionTypes.LoadLists , payload : this.todos })
+    this.todos = this.store.pipe(select(selectTodos())).subscribe((data)=>{
+      console.log(data);
+    })
+    
   }
 
   onChangefilter(){
+    this.store.dispatch(new ChangeFilter('checked'));
+  }
 
-
+  onSubmit(){
+    
   }
 
 

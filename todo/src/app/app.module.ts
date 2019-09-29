@@ -10,7 +10,9 @@ import { StoreModule, Store } from '@ngrx/store';
 // import { reducers, metaReducers } from './reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import { ListReducer , EditReducer } from './reducers/index';
+import {EditReducer , ListReducer} from './reducers/index';
+import { AppService } from './app.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -18,29 +20,28 @@ import { ListReducer , EditReducer } from './reducers/index';
     AppComponent,
     ListComponent,
     EditComponent,
-    StoreModule.forRoot({
-      ListReducer,
-    })
-    // Instrumentation must be imported after importing StoreModule (config is optional)
-    StoreDevtoolsModule.instrument({
-      maxAge:25 ,
-      logOnly:true
-    })
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    // StoreModule.forRoot(reducers, {
-    //   metaReducers, 
-    //   runtimeChecks: {
-    //     strictStateImmutability: true,
-    //     strictActionImmutability: true,
-    //   }
-    // }),
-    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    HttpClientModule,
+    StoreModule.forRoot({ ListReducer, EditReducer,}, 
+      {
+        runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true,
+      }
+    }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      logOnly: true, // Restrict extension to log-only mode
+    }),
+    // !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
-  providers: [],
+  providers: [
+    AppService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

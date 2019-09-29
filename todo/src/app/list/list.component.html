@@ -1,11 +1,11 @@
 <p>list works!</p>
 
 <div>
-        <div *ngFor="let todo of TodoList">
+        <li *ngFor="let todo of todos">
             <h1>{{todo.title}}</h1>
             <p>{{todo.description}}</p>
             <input type="checkbox" checked="{{todo.checked}}"/>
-        </div>
+        </li>
 </div>
 
 
