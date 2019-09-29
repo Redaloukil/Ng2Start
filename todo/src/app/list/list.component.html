@@ -1,7 +1,7 @@
 <p>list works!</p>
 
 <div>
-        <li *ngFor="let todo of todos">
+        <li *ngFor="let todo of todos | async">
             <h1>{{todo.title}}</h1>
             <p>{{todo.description}}</p>
             <input type="checkbox" checked="{{todo.checked}}"/>

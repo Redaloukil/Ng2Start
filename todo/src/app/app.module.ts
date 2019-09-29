@@ -10,7 +10,7 @@ import { StoreModule, Store } from '@ngrx/store';
 // import { reducers, metaReducers } from './reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import {EditReducer , ListReducer} from './reducers/index';
+import {EditReducer , ListReducer, reducers} from './reducers/index';
 import { AppService } from './app.service';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -26,13 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    StoreModule.forRoot({ ListReducer, EditReducer,}, 
-      {
-        runtimeChecks: {
-        strictStateImmutability: true,
-        strictActionImmutability: true,
-      }
-    }),
+    StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       logOnly: true, // Restrict extension to log-only mode

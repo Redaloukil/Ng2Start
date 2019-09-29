@@ -3,10 +3,11 @@ import { Todo } from '../utils/Todo';
 import { Store, select } from '@ngrx/store';
 import {Actions , ofType} from '@ngrx/effects'
 import '../actions/list.actions';
-import { ListActionTypes, ChangeFilter } from '../actions/list.actions';
+import * as fromList from '../actions/list.actions';
 import { AppState, selectTodos } from '../reducers';
 import { getListData } from './list.selector';
-import { Observable, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-list',
@@ -18,18 +19,20 @@ export class ListComponent implements OnInit {
 
   constructor(private store : Store<AppState>) { }
 
-  todos :Subscription;
+  todos :Observable<Todo[]>;
 
   ngOnInit() {
     // load the todo list 
-    this.todos = this.store.pipe(select(selectTodos())).subscribe((data)=>{
-      console.log(data);
-    })
+    this.todos = this.store.select(getListData).pipe(
+      map((data)=> {
+        return data
+      })
+    )
     
   }
 
   onChangefilter(){
-    this.store.dispatch(new ChangeFilter('checked'));
+    this.store.dispatch(new fromList.ChangeFilter('checked'));
   }
 
   onSubmit(){

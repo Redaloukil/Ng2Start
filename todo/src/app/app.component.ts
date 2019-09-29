@@ -6,7 +6,7 @@ import { Observable, pipe } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { State } from '@ngrx/store';
 import { AppState } from './reducers';
-import { LoadLists } from './actions/list.actions';
+import * as fromList from './actions/list.actions';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +22,7 @@ export class AppComponent {
     //load the todos file to the state 
     
     const todos = this.appService.getTodos();
-    this.state.dispatch(new LoadLists(todos));
+    this.state.dispatch(new fromList.LoadLists(todos));
     
 
   } 

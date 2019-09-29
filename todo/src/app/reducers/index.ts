@@ -55,7 +55,7 @@ export function EditReducer(state:EditState = InitialEditState, action : any): E
     case EditActionTypes.ChangeEditTitle :
       return {
         ...state,
-        title : action.value ,
+        title:action.value,
       }
     case EditActionTypes.ChangeEditDescription : 
       return {
@@ -93,7 +93,7 @@ export function ListReducer(state:ListState = InitialListState, action : any): L
   }
 }
 
-export const selectTodos = (state: AppState) => state.TodoList;
+export const selectTodos = (state: AppState) => state.list.TodoList;
 
 
 

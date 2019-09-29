@@ -26,19 +26,19 @@ export class SubmitEdit extends EditAction {
 }
 
 export class ChangeEditTitle extends EditAction {
-  constructor(value : string , key : string){
+  constructor(value : string){
     super(EditActionTypes.ChangeEditTitle)
   }
 }
 
 export class ChangeEditDescription extends EditAction {
-  constructor(value : string , key : string){
+  constructor(value : string){
     super(EditActionTypes.ChangeEditTitle)
   }
 }
 
 export class ChangeEditChecked extends EditAction {
-  constructor(value : string , key : string){
+  constructor(){
     super(EditActionTypes.ChangeEditTitle)
   }
 }

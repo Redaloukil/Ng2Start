@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { dispatch } from 'rxjs/internal/observable/range';
-import { State } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { AppState } from '../reducers';
+import * as fromEdit from '../actions/edit.actions';
+import { getEditTitleData, getEditDescriptionData } from './edit.selectors';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-edit',
@@ -10,10 +13,10 @@ import { AppState } from '../reducers';
 })
 export class EditComponent implements OnInit {
 
-  constructor(private state : State<AppState>) { }
+  constructor(private store : Store<AppState>) { }
 
-  public title:string;
-  public description:string;
+  public title:Observable<string>;
+  public description:Observable<string>;
 
   
 
@@ -23,20 +26,23 @@ export class EditComponent implements OnInit {
 
   addTodo(){
     const errors = this.validate();
+
     
   }
 
   modelTitleChanged(ev){
+    this.store.dispatch(new fromEdit.ChangeEditTitle(ev))
+    this.title = this.store.select(getEditTitleData)
   }
   
   modelDescriptionChanged(ev){
-    console.log(ev);
+    this.store.dispatch(new fromEdit.ChangeEditDescription(ev))
+    this.description = this.store.select(getEditDescriptionData)
   }
 
   validate(){
     let errors;
-    if (this.title.length === 0) errors.title = "Please provide a title";
-    if (this.description.length === 0) errors.desdescription = "Please provide a description";
+    
     return errors
   }
 }
