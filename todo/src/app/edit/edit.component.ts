@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { dispatch } from 'rxjs/internal/observable/range';
 import { Store } from '@ngrx/store';
 import { AppState } from '../reducers';
-import * as fromEdit from '../actions/edit.actions';
+import * as fromList from '../actions/list.actions';
 import { getEditTitleData, getEditDescriptionData } from './edit.selectors';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-edit',
@@ -15,8 +14,8 @@ export class EditComponent implements OnInit {
 
   constructor(private store : Store<AppState>) { }
 
-  public title:Observable<string>;
-  public description:Observable<string>;
+  public title:string;
+  public description:string;
 
   
 
@@ -25,24 +24,31 @@ export class EditComponent implements OnInit {
   }
 
   addTodo(){
+    console.log("add todo called");
     const errors = this.validate();
+    if(errors.title.length === 0 && errors.description.length === 0){
+      
+      this.store.dispatch(new fromList.SubmitList({title : this.title , description : this.description , checked : false}))
+      this.title = "";
+      this.description = "";
+    }
 
     
   }
 
   modelTitleChanged(ev){
-    this.store.dispatch(new fromEdit.ChangeEditTitle(ev))
-    this.title = this.store.select(getEditTitleData)
+  
   }
   
   modelDescriptionChanged(ev){
-    this.store.dispatch(new fromEdit.ChangeEditDescription(ev))
-    this.description = this.store.select(getEditDescriptionData)
+  
   }
 
   validate(){
-    let errors;
-    
+    var errors = {title:'' , description:''};
+    if (this.title.length === 0) errors.title = "Please provide a title";
+    if (this.description.length === 0) errors.description = "Please provide a description";
+    console.log(errors);
     return errors
   }
 }

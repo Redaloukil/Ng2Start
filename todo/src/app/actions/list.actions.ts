@@ -18,10 +18,13 @@ export class LoadLists extends ListAction {
   
   constructor(public payload : Todo[]){
     super(ListActionTypes.LoadLists);
-    
   }
+}
 
-  
+export class SubmitList extends ListAction {
+  constructor(public payload : Todo){
+    super(ListActionTypes.AddTodoList)
+  }
 }
 
 export class ChangeFilter extends ListAction {
@@ -31,7 +34,7 @@ export class ChangeFilter extends ListAction {
 }
 
 export class DeleteLists extends ListAction {
-  constructor(){
+  constructor(public index : number){
     super(ListActionTypes.DeleteLists);
   }
 }

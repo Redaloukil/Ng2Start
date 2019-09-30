@@ -13,6 +13,7 @@ import { environment } from '../environments/environment';
 import {EditReducer , ListReducer, reducers} from './reducers/index';
 import { AppService } from './app.service';
 import { HttpClientModule } from '@angular/common/http';
+import { FilterComponent } from './edit/filter/filter.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent,
     ListComponent,
     EditComponent,
+    FilterComponent,
   ],
   imports: [
     BrowserModule,

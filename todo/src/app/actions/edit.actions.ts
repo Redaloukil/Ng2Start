@@ -19,11 +19,7 @@ export class LoadEdit extends EditAction {
   }
 }
 
-export class SubmitEdit extends EditAction {
-  constructor(public payload : Todo){
-    super(EditActionTypes.SubmitEdit)
-  }
-}
+
 
 export class ChangeEditTitle extends EditAction {
   constructor(value : string){

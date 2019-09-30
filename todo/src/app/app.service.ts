@@ -12,21 +12,7 @@ export class AppService {
     constructor(private http : HttpClient){}
 
     todos : Todo[] = [
-        {   
-            "title" : "titleA" , 
-            "description" : "Description of title A" , 
-            "checked" : false
-        },
-        {   
-            "title" : "titleB" , 
-            "description" : "Description of title B" , 
-            "checked" : false
-        },
-        {   
-            "title" : "titleC" , 
-            "description" : "Description of title C" , 
-            "checked" : false
-        }
+        
     ]
     
     getTodos(){

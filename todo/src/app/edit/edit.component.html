@@ -2,9 +2,7 @@
 <fieldset>
     <input [(ngModel)]="title" (ngModelChange)="modelTitleChanged($event)" type="text" placeholder="Enter todo text"/>
     <input [(ngModel)]="description" (ngModelChange)="modelDescriptionChanged($event)" type="text" plaholder="Enter todo description"/>
-
-
     <button (click)="addTodo()">Submit</button>
 </fieldset>
-
+<app-filter></app-filter>
 

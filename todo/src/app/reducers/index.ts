@@ -11,6 +11,7 @@ import { routerReducer, RouterReducerState} from '@ngrx/router-store';
 import { EditActionTypes } from '../actions/edit.actions';
 import { ListActionTypes, ListAction } from '../actions/list.actions';
 import { Todo } from '../utils/Todo';
+import { Action } from 'rxjs/internal/scheduler/Action';
 
 
 
@@ -79,14 +80,23 @@ export function ListReducer(state:ListState = InitialListState, action : any): L
         ...state,
         TodoList : action.payload,
       };
+    case ListActionTypes.AddTodoList :
+      let newTodos = state.TodoList;
+      newTodos.push(action.payload);
+      return {
+        ...state,
+        TodoList : newTodos,
+      }
     case ListActionTypes.ChangeFilterLists:
       return {
         ...state
       }
     case ListActionTypes.DeleteLists :
+      const removedTodos = state.TodoList;
+      removedTodos.splice(action.index , 1)
       return {
-        TodoList : [],
-        filter :'',
+        ...state,
+        TodoList :removedTodos,
       }
     default:
       return state;
@@ -102,7 +112,6 @@ export const reducers : ActionReducerMap<AppState> = {
   router : routerReducer,
   list : ListReducer,
   edit : EditReducer,
-   
 }
 
 

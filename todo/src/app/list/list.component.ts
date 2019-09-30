@@ -35,10 +35,11 @@ export class ListComponent implements OnInit {
     this.store.dispatch(new fromList.ChangeFilter('checked'));
   }
 
-  onSubmit(){
-    
+  
+  delete(index){
+    console.log("delete " , index);
+    this.store.dispatch(new fromList.DeleteLists(index))
   }
-
 
 
   
