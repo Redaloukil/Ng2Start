@@ -2,40 +2,33 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BodyComponent } from './body/body.component';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './navbar/navbar.component';  
-
-// Material Angular
-import { 
-  MatButtonModule,
-  MatMenuModule,
-  MatToolbarModule, 
-} from '@angular/material';
-import { BodyModule } from './body/body.module';
-
-
+import { HomeComponent } from './home/home.component';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DashbordComponent } from './dashbord/dashbord.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BodyComponent,
     NavbarComponent,
+    HomeComponent,
+    PagenotfoundComponent,
+    LoginComponent,
+    SignupComponent,
+    DashbordComponent,
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
+    FormsModule,
     AppRoutingModule,
-    BodyModule,
-    NoopAnimationsModule,
-    MatButtonModule,
-    MatMenuModule,
-    MatToolbarModule,
-  ],
-  providers: [
     
   ],
-  bootstrap: [
-    AppComponent,
-  ]
+  providers: [],
+  bootstrap: [AppComponent,]
 })
-export class AppModule { }
+
+export class AppModule {}

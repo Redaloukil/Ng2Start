@@ -1,0 +1,27 @@
+<p>signup works!</p>
+
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+  <fieldset>
+    <label for="email">
+      Email
+    </label>
+    <input id="email" type="text" formControlName="email">
+  </fieldset>
+
+  <fieldset>
+    <label for="password">
+      Password
+    </label>
+    <input id="password" type="password" formControlName="password">
+  </fieldset>
+  <fieldset>
+    <label for="confirm_password">
+      Confirm Password
+    </label>
+    <input id="password" type="password" formControlName="cpassword">
+  </fieldset>
+
+  <button class="button" type="submit">Purchase</button>
+
+</form>
