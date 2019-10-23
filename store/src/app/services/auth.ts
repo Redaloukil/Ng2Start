@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { Token } from '../structures/Token';
-import { User, AuthenticatedUser} from '../structures/User'
+import { User, AuthenticatedUser} from '../structures/User';
 import { Authenticated } from '../guards/authentication';
 
 
@@ -22,6 +22,13 @@ export class AuthService {
         }
     }
     confirmToken(token:string):AuthenticatedUser{
+        return {
+            email:'string',
+            password:'string',
+            token:'string',
+        }
+    }
+    getCurrent(token:string):AuthenticatedUser{
         return {
             email:'string',
             password:'string',
