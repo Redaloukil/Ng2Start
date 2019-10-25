@@ -4,9 +4,11 @@ import { User, AuthenticatedUser } from '../../structures/User';
 
 
 export enum SignupActionsTypes {
+    
     SIGNUP_REQUEST = "[AUTH-SIGNUP]SIGNUP_REQUEST",
     SIGNUP_SUCCESS = "[AUTH-SIGNUP]SIGNUP_SUCCESS",
     SIGNUP_FAILURE = "[AUTH-SIGNUP]SIGNUP_FAILURE",
+
 }
 
 export class SignupRequest implements Action{
